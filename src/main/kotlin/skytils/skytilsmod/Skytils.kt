@@ -20,6 +20,8 @@ package skytils.skytilsmod
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiButton
@@ -82,6 +84,7 @@ import skytils.skytilsmod.utils.graphics.ScreenRenderer
 import java.io.File
 import java.util.concurrent.Executors
 import java.util.concurrent.ThreadPoolExecutor
+import kotlin.coroutines.CoroutineContext
 
 
 @Mod(
@@ -91,7 +94,9 @@ import java.util.concurrent.ThreadPoolExecutor
     acceptedMinecraftVersions = "[1.8.9]",
     clientSideOnly = true
 )
-class Skytils {
+class Skytils: CoroutineScope {
+
+    override val coroutineContext: CoroutineContext = dispatcher + SupervisorJob()
 
     companion object {
         const val MODID = "skytils"
