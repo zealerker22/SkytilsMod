@@ -94,11 +94,9 @@ import kotlin.coroutines.CoroutineContext
     acceptedMinecraftVersions = "[1.8.9]",
     clientSideOnly = true
 )
-class Skytils: CoroutineScope {
+class Skytils {
 
-    override val coroutineContext: CoroutineContext = dispatcher + SupervisorJob()
-
-    companion object {
+    companion object : CoroutineScope {
         const val MODID = "skytils"
         const val MOD_NAME = "Skytils"
         const val VERSION = "1.1.0"
@@ -146,6 +144,8 @@ class Skytils: CoroutineScope {
 
         @JvmField
         val dispatcher = threadPool.asCoroutineDispatcher()
+
+        override val coroutineContext: CoroutineContext = dispatcher + SupervisorJob()
 
         val hylinAPI = createHylinAPI("", false)
 
